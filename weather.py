@@ -7,10 +7,6 @@ Created on Fri Jan  3 20:41:27 2020
 
 from requests import request
 from datetime import datetime
-from os import getcwd
-
-print(getcwd())
-input("Stop")
 
 headers = {
         'accept': "application/json",
