@@ -22,7 +22,10 @@ longitude = respDict['longitude']
 
 del headers, response, respDict
 
-DarkSkySecKey = input("Insert your key: ")
+DarkSkySecKey = 0
+
+with open("SecKey.txt",'r') as file:
+    DarkSkySecKey = file.readline()
 
 response = request("GET", "https://api.darksky.net/forecast/{}/{},{}?units=si".format(DarkSkySecKey, latitude, longitude))
 d = response.json()
