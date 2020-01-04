@@ -7,6 +7,9 @@ Created on Fri Jan  3 20:41:27 2020
 
 from requests import request
 from datetime import datetime
+from time import sleep
+from os import sep
+from sys import platform
 
 headers = {
         'accept': "application/json",
@@ -23,8 +26,12 @@ longitude = respDict['longitude']
 del headers, response, respDict
 
 DarkSkySecKey = 0
+SecKeyFilePath = ''
 
-SecKeyFilePath = "/home/marek/python/WeatherApp/SecKey.txt"
+if platform == 'win32':
+    SecKeyFilePath = "SecKey.txt"
+elif platform == 'linux':
+    SecKeyFilePath = "/home/marek/python/WeatherApp/SecKey.txt"
 
 with open(SecKeyFilePath,'r') as file:
     DarkSkySecKey = file.readline()
@@ -103,6 +110,7 @@ try:
             print("Wind direction: {}".format(wd))
         print("Humidity: {} %".format(dat['humidity']*100))
         print("Visibility: {} km".format(dat['visibility']))
+        sleep(2)
         print()
 
     print("Powered by Dark Sky. ( https://darksky.net/poweredby )")
