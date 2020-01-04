@@ -22,7 +22,7 @@ longitude = respDict['longitude']
 
 del headers, response, respDict
 
-DarkSkySecKey = 'd168120e589cdb3dd911da032d27a0d4'
+DarkSkySecKey = ''
 
 response = request("GET", "https://api.darksky.net/forecast/{}/{},{}?units=si".format(DarkSkySecKey, latitude, longitude))
 d = response.json()
