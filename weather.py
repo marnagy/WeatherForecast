@@ -22,7 +22,7 @@ longitude = respDict['longitude']
 
 del headers, response, respDict
 
-DarkSkySecKey = ''
+DarkSkySecKey = input("Insert your key: ")
 
 response = request("GET", "https://api.darksky.net/forecast/{}/{},{}?units=si".format(DarkSkySecKey, latitude, longitude))
 d = response.json()
@@ -76,6 +76,28 @@ try:
         print("Time: {}.{}.{} {}".format( t.day, t.month, t.year, t.time()))
         print("Apparent temperature: {}°C".format(dat['apparentTemperature']))
         print("Temperature: {}°C".format(dat['temperature']))
+        print("Wind speed: {} m/s".format(dat['windSpeed']))
+        if dat['windSpeed'] > 0:
+            wd = cur['windBearing']
+            if wd < 45/2 or wd > 360-45/2:
+                wd = "N"
+            elif wd > 45/2 and wd < 3*45/2:
+                wd = "NW"
+            elif wd > 3*45/2 and wd < 5*45/2:
+                wd = "W"
+            elif wd > 5*45/2 and wd < 7*45/2:
+                wd = "SW"
+            elif wd > 7*45/2 and wd < 9*45/2:
+                wd = "S"
+            elif wd > 9*45/2 and wd < 11*45/2:
+                wd = "SE"
+            elif wd > 11*45/2 and wd < 13*45/2:
+                wd = "E"
+            elif wd > 13*45/2 and wd < 15*45/2:
+                wd = "NE"
+            print("Wind direction: {}".format(wd))
+        print("Humidity: {} %".format(dat['humidity']*100))
+        print("Visibility: {} km".format(dat['visibility']))
         print()
 
     print("Powered by Dark Sky. ( https://darksky.net/poweredby )")
