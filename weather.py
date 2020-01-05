@@ -77,12 +77,12 @@ try:
     hours = int(input("Set amount of hours: "))
     if hours <= 0:
         raise Exception("Invalid number of hours")
-    hours = min(hours, 48)
+    hours = min(hours, 47)
     print("Hourly:")
     h = d['hourly']
     dataArr = h['data']
 
-    for i in range(hours):
+    for i in range(1, hours + 1):
         dat = dataArr[i]
         t = datetime.fromtimestamp(dat['time'])
         print("Time: {}.{}.{} {}".format( t.day, t.month, t.year, t.time()))
@@ -110,7 +110,8 @@ try:
             print("Wind direction: {}".format(wd))
         print("Humidity: {} %".format(dat['humidity']*100))
         print("Visibility: {} km".format(dat['visibility']))
-        sleep(2)
+        if i < hours:
+            sleep(2)
         print()
 
     print("Powered by Dark Sky. ( https://darksky.net/poweredby )")
